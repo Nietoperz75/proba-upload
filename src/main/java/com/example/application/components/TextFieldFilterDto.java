@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-public class TextFieldFilterDto implements FilterFieldDto<Integer> {
+public class TextFieldFilterDto implements FilterFieldDto<String> {
 
 	private boolean wholeField;
 	
@@ -75,8 +75,8 @@ public class TextFieldFilterDto implements FilterFieldDto<Integer> {
 	}
 	
 	@Override
-	public Predicate<Integer> getFilterPredicate() {
-		Predicate<Integer> simplePredicate;
+	public Predicate<String> getFilterPredicate() {
+		Predicate<String> simplePredicate;
 		if(StringUtils.isBlank(filterValue)) {
 			return s -> true;
 		} 

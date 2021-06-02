@@ -1,7 +1,7 @@
 package com.example.application.service;
 
 
-import com.example.application.model.Slownik;
+import com.example.application.model.SlownikOld;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,8 +11,8 @@ public class SlownikService {
 
     }
 
-    public Slownik slownikZTablicy(String[] tablica){
-        Slownik slownik = new Slownik();
+    public SlownikOld slownikZTablicy(String[] tablica){
+        SlownikOld slownik = new SlownikOld();
         slownik.setPierwszy((tablica[0].isEmpty())?-1:Integer.parseInt(tablica[0]));
         slownik.setDrugi((tablica[1].isEmpty())?-1:Integer.parseInt(tablica[1]));
         slownik.setTrzeci((tablica[2].isEmpty())?-1:Integer.parseInt(tablica[2]));

@@ -1,7 +1,7 @@
 package com.example.application.views.helloworld;
 
 import com.example.application.components.TextFilterField;
-import com.example.application.model.Slownik;
+import com.example.application.model.SlownikOld;
 import com.example.application.service.SlownikService;
 import com.vaadin.componentfactory.enhancedgrid.EnhancedColumn;
 import com.vaadin.componentfactory.enhancedgrid.EnhancedGrid;
@@ -48,16 +48,18 @@ public class HelloWorldView extends HorizontalLayout {
     private MemoryBuffer memoryBuffer;
     private Div output;
     private SlownikService slownikService;
-    private EnhancedGrid<Slownik> grid;
-    private List<Slownik> lista;
-    private ListDataProvider<Slownik> listDataProvider;
+    private Grid<SlownikOld> grid;
+    private List<SlownikOld> lista;
+    private ListDataProvider<SlownikOld> listDataProvider;
+    private VerticalLayout hl;
 
     public HelloWorldView(SlownikService slownikService) {
+        hl = new VerticalLayout();
         this.slownikService = slownikService;
         lista = new ArrayList<>();
         listDataProvider = new ListDataProvider<>(lista);
-        grid = new EnhancedGrid<>();
-        EnhancedColumn<Slownik>pierwszy = grid.addColumn(Slownik::getPierwszy).setHeader("Pierwszy", new TextFilterField());
+        grid = new Grid<>(SlownikOld.class);
+//        EnhancedColumn<SlownikOld>pierwszy = grid.addColumn(SlownikOld::getPierwszy).setHeader("Pierwszy");
         grid.setDataProvider(listDataProvider);
         output = new Div();
         memoryBuffer = new MemoryBuffer();
@@ -69,13 +71,14 @@ public class HelloWorldView extends HorizontalLayout {
             System.out.println("PLIK: "+event.getFileName());
             System.out.println("MIME: "+event.getMIMEType());
             Component component = createComponent(event.getMIMEType(), event.getFileName(), memoryBuffer.getInputStream());
-            output.add(component);
+//            output.add(component);
         });
         addClassName("hello-world-view");
         name = new TextField("Your name");
         sayHello = new Button("Say hello");
-        add(name, sayHello, upload, output, grid);
-        setVerticalComponentAlignment(Alignment.END, name, sayHello);
+        hl.add(upload, grid);
+        add(hl);
+//        setVerticalComponentAlignment(Alignment.END, name, sayHello);
         sayHello.addClickListener(e -> {
             Notification.show("Hello " + name.getValue());
         });
@@ -134,7 +137,7 @@ public class HelloWorldView extends HorizontalLayout {
         lista.clear();
         for(String s: text){
             String[] tablica = s.split(";");
-            Slownik slownik = slownikService.slownikZTablicy(tablica);
+            SlownikOld slownik = slownikService.slownikZTablicy(tablica);
             System.out.println("ROZMIAR TABLICY: "+tablica.length);
             System.out.println(slownik.toString());
             lista.add(slownik);

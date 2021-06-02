@@ -1,83 +1,45 @@
 package com.example.application.model;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "slownik")
 public class Slownik {
 
-    private Integer pierwszy = -1;
-    private Integer drugi =  -1;
-    private Integer trzeci=  -1;
-    private Integer czwarty=  -1;
-    private Integer piaty=  -1;
-    private Integer szosty=  -1;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "slowId")
+    private Long slowId;
 
-    public Slownik() {
-    }
+    @Column(name = "RecNo")
+    private Integer recNo;
 
-    public Slownik(Integer pierwszy, Integer drugi, Integer trzeci, Integer czwarty, Integer piaty, Integer szosty) {
-        this.pierwszy = pierwszy;
-        this.drugi = drugi;
-        this.trzeci = trzeci;
-        this.czwarty = czwarty;
-        this.piaty = piaty;
-        this.szosty = szosty;
-    }
+    @Column(name = "LongGate")
+    private String longGate;
 
-    public Integer getPierwszy() {
-        return pierwszy;
-    }
+    @Column(name = "description")
+    private String description;
 
-    public void setPierwszy(Integer pierwszy) {
-        this.pierwszy = pierwszy;
-    }
+    @Column(name = "idStacji")
+    private Integer idStacji;
 
-    public Integer getDrugi() {
-        return drugi;
-    }
+    @Column(name = "rodzajBramki")
+    private Character rodzajBramki;
 
-    public void setDrugi(Integer drugi) {
-        this.drugi = drugi;
-    }
+    @Column(name = "rodzajPomiaru")
+    private Character rodzajPomiaru;
 
-    public Integer getTrzeci() {
-        return trzeci;
-    }
+    @Column(name = "gateId")
+    private Integer gateId;
 
-    public void setTrzeci(Integer trzeci) {
-        this.trzeci = trzeci;
-    }
+    @Column(name = "minimum", nullable = true)
+    private Integer minimum;
 
-    public Integer getCzwarty() {
-        return czwarty;
-    }
+    @Column(name = "maksimum", nullable = true)
+    private Integer maksimum;
 
-    public void setCzwarty(Integer czwarty) {
-        this.czwarty = czwarty;
-    }
+    
 
-    public Integer getPiaty() {
-        return piaty;
-    }
-
-    public void setPiaty(Integer piaty) {
-        this.piaty = piaty;
-    }
-
-    public Integer getSzosty() {
-        return szosty;
-    }
-
-    public void setSzosty(Integer szosty) {
-        this.szosty = szosty;
-    }
-
-    @Override
-    public String toString() {
-        return "Slownik{" +
-                "pierwszy=" + pierwszy +
-                ", drugi=" + drugi +
-                ", trzeci=" + trzeci +
-                ", czwarty=" + czwarty +
-                ", piaty=" + piaty +
-                ", szosty=" + szosty +
-                '}';
-    }
 }
